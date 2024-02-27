@@ -1,0 +1,52 @@
+NAME = fdf
+
+COMP = cc
+CFLAGS = -Wall -Wextra #-Werror
+
+SRC = main.c \
+      utils.c \
+      parse_file.c \
+      parsing_errors.c
+
+SRC_BONUS = morbius
+
+OBJ = $(SRC:.c=.o)
+
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
+
+all : libft.a $(NAME)
+	@echo "do not push everything sucks"
+
+libft.a :
+	@make -C libft/
+	@mv libft/libft.a libft.a
+	@make -C libft/ clean
+
+libft_bonus.a :
+	@make -C libft/ amogus
+	@mv libft/libft.a libft_bonus.a
+	@make -C libft/ clean
+
+bonus : morbius
+	
+$(NAME) : $(OBJ)
+	@$(COMP) $(CFLAGS) $^ libft.a -o $@
+
+%.o : %.c
+	@$(COMP) $(CFLAGS) -c $^ -o $@
+
+clean :
+	@rm -f $(OBJ) $(OBJ_BONUS)
+	@rm -f libft.a
+	@rm -f libft_bonus.a
+	@make -C libft clean
+
+fclean : clean
+	@rm -f $(NAME)
+
+chokbar :
+	@make -C libft/ chokbar
+
+re : fclean all
+
+.PHONY: all fclean clean re bonus chokbar

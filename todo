@@ -1,0 +1,25 @@
+tester null
+
+opti ligne droite ?
+
+slice en 200 * 200 (cache) (chunking)
+
+zoom tres loin bizarre (overflow ?)
+
+qualite basse si gros
+
+declarerer les matrices en vec4d
+
+render que le visible
+
+abs speciale mais ca a pas l'ai tres rapide
+
+mavx
+
+test passer par reference
+
+float ou double
+
+macrolibx
+
+rotations pave
