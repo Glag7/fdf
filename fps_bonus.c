@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:25:41 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/27 20:43:50 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:54:03 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,27 @@
 //space because mlx
 static inline void	drawfps(t_mlx *mlx, int fps_val, char draw)
 {
-	static char	num[4] = "   ";
+	static char	num[8] = "fps:    ";
 	static int	todraw = 0;
 	static int	color[9] = {RED, ORE, ORA, YEL, YGR, LGR, GRE, GRE, GRE};
 
 	if (draw)
 	{
-		mlx_string_put(mlx->mlx, mlx->win, 35, 10, 0xFF000000, num);
+		mlx_string_put(mlx->mlx, mlx->win, 0, 10, 0xFF000000, num);
 		if (todraw > 9)
 		{
-			num[2] = 0;
-			num[1] = todraw % 10 + '0';
-			num[0] = todraw / 10 + '0';
-			mlx_string_put(mlx->mlx, mlx->win, 35, 10, color[todraw / 10], num);
-			num[2] = ' ';
+			num[6] = 0;
+			num[5] = todraw % 10 + '0';
+			num[4] = todraw / 10 + '0';
+			mlx_string_put(mlx->mlx, mlx->win, 0, 10, color[todraw / 10], num);
+			num[6] = ' ';
 		}
 		else
 		{
-			num[1] = 0;
-			num[0] = todraw % 10 + '0';
-			mlx_string_put(mlx->mlx, mlx->win, 35, 10, color[todraw / 10], num);
-			num[1] = ' ';
+			num[5] = 0;
+			num[4] = todraw % 10 + '0';
+			mlx_string_put(mlx->mlx, mlx->win, 0, 10, RED, num);
+			num[5] = ' ';
 		}
 	}
 	else
@@ -61,13 +61,11 @@ int	putfps(void *mlx_)
 	clock_gettime(CLOCK_MONOTONIC_RAW, &curr);
 	fps_val = 1.0 / ((float)(curr.tv_sec - past.tv_sec)
 			+ (float)(curr.tv_nsec - past.tv_nsec) *1e-9);
-	if (fps_val < 99.0f)
-	{
-		fps(1, fps_val);
-		drawfps(mlx, round(fps_val), 0);
-	}
+	fps(1, fps_val);
+	drawfps(mlx, round(fps_val), 0);
 	if (curr.tv_sec > past.tv_sec)
 		drawfps(mlx, 0, 1);
+	printf("fps: %f\n", fps_val);
 	past = curr;
 	return (0);
 }

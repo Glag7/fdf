@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:21:17 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/27 21:35:02 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:54:45 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 
 //fps
 # define MIN_FPS 15.0f
-# define MAX_FPS 80.0f
+# define FPS_CAP 60
 
 //screen
-# define WID 1600
-# define HEI 900
+# define WID 1600 * 2 / 3
+# define HEI 900 * 2 / 3
 # define PAD 40
 
 //opts

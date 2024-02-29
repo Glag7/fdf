@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:49:06 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/27 21:32:55 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:37:29 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	display_grid(t_points points, void *mlx_, void *win)
 	mlx = (t_mlx){mlx_, win, NULL};
 	data = (t_data){&mlx, &points, &wininfo};
 	mlx.img = new_img(&data);
-	mlx_set_fps_goal(mlx.mlx, 60);
+	mlx_set_fps_goal(mlx.mlx, FPS_CAP);
 	place_points(mlx, points, wininfo);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEWHEEL, &zoom, &data);
@@ -94,7 +94,6 @@ void	display_grid(t_points points, void *mlx_, void *win)
 	//mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEUP, &mouse_unhook, &data);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, &win_hook, mlx.mlx);
 	mlx_loop_hook(mlx.mlx, &putfps, &mlx);
-	mlx_string_put(mlx.mlx, mlx.win, 0, 10, 0xFFFFFF00, "fps:");
 	mlx_loop(mlx.mlx);
 	free(points.co);
 	mlx_destroy_image(mlx.mlx, mlx.img);

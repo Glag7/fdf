@@ -1,5 +1,7 @@
 tester null
 
+simplifier fps et qjouter ligne dqns mlx
+
 opti ligne droite ?
 
 slice en 200 * 200 (cache) (chunking)

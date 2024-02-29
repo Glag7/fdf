@@ -6,7 +6,7 @@
 /*   By: maldavid <kbz_8.dev@akel-engine.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:56:17 by maldavid          #+#    #+#             */
-/*   Updated: 2024/01/18 15:20:03 by maldavid         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:15:22 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ namespace mlx
 		if(_fps_elapsed_time >= _ns)
 		{
 			_fps_before += _ns;
+			std::this_thread::sleep_for(std::chrono::duration<double, std::nano>(_ns));
 			return true;
 		}
 		std::this_thread::sleep_for(std::chrono::duration<double, std::nano>(_ns));
