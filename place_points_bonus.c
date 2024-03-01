@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:17:44 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/27 18:22:11 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/03/01 23:10:28 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,14 @@ static void	draw_half(t_mlx mlx, t_points points, t_win winfo)
 	{
 		j = 0;
 		start.x = (float)i * winfo.scale * HALF_S + winfo.xoffset;
-		start.y = -(TWOTHIRD_S * (float)points.co[i] - SIXTH_S
+		start.y = -(TWOTHIRD_S * (float)points.co[i] * winfo.zscale - SIXTH_S
 				* (float)i) * winfo.scale + winfo.yoffset;
 		j = 1;
 		while (j < points.hei)
 		{
 			end.x = ((float)i - j) * winfo.scale * HALF_S + winfo.xoffset;
 			end.y = -(TWOTHIRD_S * (float)points.co[j * points.wid + i]
+					* winfo.zscale
 					- SIXTH_S * (float)(i + j)) * winfo.scale + winfo.yoffset;
 			draw_line(mlx.mlx, mlx.img, start, end);
 			start = end;
@@ -73,7 +74,6 @@ static void	draw_half(t_mlx mlx, t_points points, t_win winfo)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 }
 
 void	place_points(t_mlx mlx, t_points points, t_win winfo)
@@ -87,13 +87,14 @@ void	place_points(t_mlx mlx, t_points points, t_win winfo)
 	while (++i < points.hei)
 	{
 		start.x = -(float)i * winfo.scale * HALF_S + winfo.xoffset;
-		start.y = -(TWOTHIRD_S * (float)points.co[i * points.wid] - SIXTH_S
+		start.y = -(TWOTHIRD_S * (float)points.co[i * points.wid] * winfo.zscale - SIXTH_S
 				* (float)i) * winfo.scale + winfo.yoffset;
 		j = 1;
 		while (j < points.wid)
 		{
 			end.x = ((float)j - i) * winfo.scale * HALF_S + winfo.xoffset;
 			end.y = -(TWOTHIRD_S * (float)points.co[i * points.wid + j]
+					* winfo.zscale
 					- SIXTH_S * (float)(i + j)) * winfo.scale + winfo.yoffset;
 			draw_line(mlx.mlx, mlx.img, start, end);
 			start = end;

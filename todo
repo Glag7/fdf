@@ -1,14 +1,6 @@
 tester null
 
-simplifier fps et qjouter ligne dqns mlx
-
-opti ligne droite ?
-
-slice en 200 * 200 (cache) (chunking)
-
 zoom tres loin bizarre (overflow ?)
-
-qualite basse si gros
 
 declarerer les matrices en vec4d
 
@@ -22,12 +14,8 @@ test passer par reference
 
 float ou double
 
-macrolibx
-
 rotations pave
 
 overflow short oob
 
 stocker les pts dans  tableaux puis faire lesl ignes
-
-faire un flag need render au lieu d'en re pisser un a chaque fois

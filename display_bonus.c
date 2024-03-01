@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:49:06 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 20:12:43 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 23:08:21 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	init_win(t_win *wininfo, t_points *points)
 	wininfo->wid = wid;
 	wininfo->hei = hei;
 	wininfo->scale = scale;
+	wininfo->zscale = 1.0f;
 }
 
 static int	key_hook(int key, void *data_)
@@ -47,6 +48,16 @@ static int	key_hook(int key, void *data_)
 	}
 	else if (key == SDL_SCANCODE_LSHIFT)
 		data->keydown |= SHIFT;
+	else if (key == SDL_SCANCODE_KP_PLUS)
+	{
+		data->win.zscale *= 1.03f;
+		data->keydown |= RENDER;
+	}
+	else if (key == SDL_SCANCODE_KP_MINUS)
+	{
+		data->win.zscale *= 0.97f;
+		data->keydown |= RENDER;
+	}
 	//couleurs
 	//rotations numpad
 	return (0);

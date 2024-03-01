@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:21:17 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 20:22:24 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 23:01:40 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_win
 	float	xoffset;
 	float	yoffset;
 	float	scale;
+	float	zscale;
 }	t_win;
 
 typedef struct s_points
