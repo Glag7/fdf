@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:21:17 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 17:24:58 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 19:20:59 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define ZOOM_B 0.97f
 
 //fps
-# define MIN_FPS 8.0f
+# define MIN_FPS 5.0f
 # define FPS_CAP 60
 
 //screen
@@ -105,14 +105,13 @@ typedef struct s_mlx
 
 typedef struct s_data
 {
-	t_mlx		mlx;
-	t_points	points;
-	t_win		win;
-	t_point		mouse;
-	int		pad;//huh
-	t_point		mouseold;
+	t_mlx			mlx;
+	t_points		points;
+	t_win			win;
+	t_point			mouse;
+	t_point			mouseold;
 	unsigned char	keydown;
-	float		fps;
+	float			fps;
 	//rotmat
 }	t_data;
 

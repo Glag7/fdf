@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:34:24 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 16:37:12 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 19:10:54 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,9 @@ void	*new_img(t_data *data)
 	return (img);
 }
 
-int	win_hook(int win, void *data_)
+int	win_hook(int win, void *mlx)
 {
-	t_data	*data;
-
-	data = data_;
 	if (win == 0)
-		mlx_loop_end(data->mlx.mlx);
-	else if (win == 4)
-		data->keydown = 0;
+		mlx_loop_end(mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:25:41 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 17:25:22 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 19:22:57 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,17 @@ static void	putfps(t_data *data)
 	past = curr;
 }
 
+//do NOT remove tmp (padding)
 int	fdf_loop(void *data_)
 {
 	t_data	*data;
+	t_point	tmp;
 
 	data = data_;
 	data->mouseold = data->mouse;
-	mlx_mouse_get_pos(data->mlx.mlx, (int *)&data->mouse.x, (int *)&data->mouse.y);
-	if (data->keydown & LMB)
+	mlx_mouse_get_pos(data->mlx.mlx, (int *)&tmp.x, (int *)&tmp.y);
+	data->mouse = tmp;
+	if (data->keydown & LMB && data->fps > MIN_FPS)
 	{
 		mlx_destroy_image(data->mlx.mlx, data->mlx.img);
 		data->mlx.img = new_img(data);
@@ -77,7 +80,7 @@ int	fdf_loop(void *data_)
 		data->win.yoffset += data->mouse.y - data->mouseold.y;
 		place_points(data->mlx, data->points, data->win);
 	}
-	else if (data->keydown & RMB)//else ?
+	else if (data->keydown & RMB && data->fps > MIN_FPS) //else ?
 	{
 	}
 	putfps(data);

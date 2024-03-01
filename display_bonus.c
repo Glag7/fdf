@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:49:06 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 17:09:42 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 19:11:42 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	display_grid(t_points points, void *mlx_, void *win)
 	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_KEYUP, &key_unhook, &data);
 	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_MOUSEDOWN, &mouse_hook, &data);
 	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_MOUSEUP, &mouse_unhook, &data);
-	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_WINDOW_EVENT, &win_hook, &data);
+	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_WINDOW_EVENT, &win_hook, mlx_);
 	mlx_loop_hook(data.mlx.mlx, &fdf_loop, &data);
 	place_points(data.mlx, data.points, data.win);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
