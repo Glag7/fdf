@@ -6,19 +6,11 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:25:41 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 20:31:03 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 23:43:54 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
-
-#define RED 0xFFFF0000
-#define ORE 0xFFFF3300
-#define ORA 0xFFFF7700
-#define YEL 0xFFFFFF00
-#define YGR 0xFF77FF00
-#define LGR 0xFF11FF00
-#define GRE 0xFF00FF00
 
 //space because mlx
 static inline void	drawfps(t_mlx *mlx, int todraw)

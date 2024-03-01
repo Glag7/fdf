@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:49:06 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 23:08:21 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 23:16:18 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	key_hook(int key, void *data_)
 	data = (t_data *)data_;
 	if (key == SDL_SCANCODE_ESCAPE)
 		mlx_loop_end(data->mlx.mlx);
-	else if (key == SDL_SCANCODE_R && data->fps > MIN_FPS)
+	else if (key == SDL_SCANCODE_KP_PERIOD)
 	{
 		init_win(&data->win, &data->points);
 		data->keydown |= RENDER;
@@ -50,12 +50,12 @@ static int	key_hook(int key, void *data_)
 		data->keydown |= SHIFT;
 	else if (key == SDL_SCANCODE_KP_PLUS)
 	{
-		data->win.zscale *= 1.03f;
+		data->win.zscale *= ZOOM_F;
 		data->keydown |= RENDER;
 	}
 	else if (key == SDL_SCANCODE_KP_MINUS)
 	{
-		data->win.zscale *= 0.97f;
+		data->win.zscale *= ZOOM_B;
 		data->keydown |= RENDER;
 	}
 	//couleurs

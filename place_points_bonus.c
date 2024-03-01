@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:17:44 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 23:10:28 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/02 00:04:58 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void	draw_line(void *mlx, void *img, t_point start, t_point end)
 	i = 0.0f;
 	while (i < steps)
 	{
-		mlx_set_image_pixel(mlx, img, pos.x, pos.y, 0xFEEDFACE);
+		if (pos.x >= 0.f && pos.x <= WID && pos.y >= 0.f && pos.y <= HEI)
+			mlx_set_image_pixel(mlx, img, pos.x, pos.y, 0xFEEDFACE);
 		pos.x += inc.x;
 		pos.y += inc.y;
 		i += 1.0f;

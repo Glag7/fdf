@@ -6,12 +6,21 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:21:17 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 23:01:40 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 23:43:48 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_BONUS_H
 # define FDF_BONUS_H
+
+//colors
+#define RED 0xFFFF0000
+#define ORE 0xFFFF3300
+#define ORA 0xFFFF7700
+#define YEL 0xFFFFFF00
+#define YGR 0xFF77FF00
+#define LGR 0xFF11FF00
+#define GRE 0xFF00FF00
 
 //keys
 # define RENDER 128
