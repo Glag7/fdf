@@ -29,3 +29,5 @@ rotations pave
 overflow short oob
 
 stocker les pts dans  tableaux puis faire lesl ignes
+
+faire un flag need render au lieu d'en re pisser un a chaque fois

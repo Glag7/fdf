@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:49:06 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 19:11:42 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 20:12:43 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ static int	key_hook(int key, void *data_)
 		mlx_loop_end(data->mlx.mlx);
 	else if (key == SDL_SCANCODE_R && data->fps > MIN_FPS)
 	{
-		mlx_destroy_image(data->mlx.mlx, data->mlx.img);
-		data->mlx.img = new_img(data);
 		init_win(&data->win, &data->points);
-		place_points(data->mlx, data->points, data->win);
+		data->keydown |= RENDER;
 	}
 	else if (key == SDL_SCANCODE_LSHIFT)
 		data->keydown |= SHIFT;
@@ -69,8 +67,6 @@ static int	zoom(int key, void *data_)
 	t_data	*data;
 
 	data = data_;
-	if (data->fps < MIN_FPS)
-		return (0);
 	if (key == 1)
 	{
 		data->win.xoffset += (data->win.xoffset - data->mouse.x) * ZOOM;
@@ -83,9 +79,7 @@ static int	zoom(int key, void *data_)
 		data->win.yoffset -= (data->win.yoffset - data->mouse.y) * ZOOM;
 		data->win.scale *= ZOOM_B;
 	}
-	mlx_destroy_image(data->mlx.mlx, data->mlx.img);
-	data->mlx.img = new_img(data);
-	place_points(data->mlx, data->points, data->win);
+	data->keydown |= RENDER;
 	return (0);
 }
 

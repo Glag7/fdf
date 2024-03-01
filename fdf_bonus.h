@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:21:17 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 19:20:59 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 20:22:24 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_BONUS_H
 
 //keys
+# define RENDER 128
 # define SHIFT 1
 # define LMB 2
 # define RMB 4

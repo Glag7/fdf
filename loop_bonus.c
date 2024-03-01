@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:25:41 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 19:22:57 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 20:31:03 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ static void	putfps(t_data *data)
 	past = curr;
 }
 
+static inline void	render(t_data *data)
+{
+	mlx_destroy_image(data->mlx.mlx, data->mlx.img);
+	data->mlx.img = new_img(data);
+	place_points(data->mlx, data->points, data->win);
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
+	data->keydown &= ~RENDER;
+}
+
 //do NOT remove tmp (padding)
 int	fdf_loop(void *data_)
 {
@@ -72,17 +81,21 @@ int	fdf_loop(void *data_)
 	data->mouseold = data->mouse;
 	mlx_mouse_get_pos(data->mlx.mlx, (int *)&tmp.x, (int *)&tmp.y);
 	data->mouse = tmp;
-	if (data->keydown & LMB && data->fps > MIN_FPS)
+	if (data->keydown & LMB)
 	{
-		mlx_destroy_image(data->mlx.mlx, data->mlx.img);
-		data->mlx.img = new_img(data);
-		data->win.xoffset += data->mouse.x - data->mouseold.x;
-		data->win.yoffset += data->mouse.y - data->mouseold.y;
-		place_points(data->mlx, data->points, data->win);
+		tmp.x = data->mouse.x - data->mouseold.x;
+		tmp.y = data->mouse.y - data->mouseold.y;
+		data->win.xoffset += tmp.x;
+		data->win.yoffset += tmp.y;
+		if (tmp.x || tmp.y)
+			data->keydown |= RENDER;
 	}
-	else if (data->keydown & RMB && data->fps > MIN_FPS) //else ?
+	else if (data->keydown & RMB) //else ?
 	{
+		//rot
 	}
+	if ((data->keydown & RENDER) && data->fps > MIN_FPS)
+		render(data);
 	putfps(data);
 	return (0);
 }
