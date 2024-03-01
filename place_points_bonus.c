@@ -6,19 +6,12 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:17:44 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/02 00:04:58 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/02 00:10:17 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-//il faut envoyer des points dans l'ecran
-//vector
-//floats
-//ligne droite ?
-//a tester avec bomba.fdf pour opti
-//division par 0 ?
-//ligne de 2 de long
 static void	draw_line(void *mlx, void *img, t_point start, t_point end)
 {
 	t_fpoint	delta;
@@ -40,7 +33,7 @@ static void	draw_line(void *mlx, void *img, t_point start, t_point end)
 	i = 0.0f;
 	while (i < steps)
 	{
-		if (pos.x >= 0.f && pos.x <= WID && pos.y >= 0.f && pos.y <= HEI)
+		if (pos.x > 0.f && pos.x < WID && pos.y > 0.f && pos.y < HEI)
 			mlx_set_image_pixel(mlx, img, pos.x, pos.y, 0xFEEDFACE);
 		pos.x += inc.x;
 		pos.y += inc.y;
