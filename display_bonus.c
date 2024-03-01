@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:49:06 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/29 19:37:29 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 17:09:42 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,62 +39,79 @@ static int	key_hook(int key, void *data_)
 
 	data = (t_data *)data_;
 	if (key == SDL_SCANCODE_ESCAPE)
-		mlx_loop_end(data->mlx->mlx);
-	else if (key == SDL_SCANCODE_R && fps(0, 0.0f) > MIN_FPS)
+		mlx_loop_end(data->mlx.mlx);
+	else if (key == SDL_SCANCODE_R && data->fps > MIN_FPS)
 	{
-		mlx_destroy_image(data->mlx->mlx, data->mlx->img);
-		data->mlx->img = new_img(data);
-		init_win(data->win, data->points);
-		place_points(*data->mlx, *data->points, *data->win);
+		mlx_destroy_image(data->mlx.mlx, data->mlx.img);
+		data->mlx.img = new_img(data);
+		init_win(&data->win, &data->points);
+		place_points(data->mlx, data->points, data->win);
 	}
+	else if (key == SDL_SCANCODE_LSHIFT)
+		data->keydown |= SHIFT;
+	//couleurs
+	//rotations numpad
+	return (0);
+}
+
+static int	key_unhook(int key, void *data_)
+{
+	t_data	*data;
+
+	data = (t_data *)data_;
+	if (key == SDL_SCANCODE_LSHIFT)
+		data->keydown &= ~SHIFT;
 	return (0);
 }
 
 static int	zoom(int key, void *data_)
 {
 	t_data	*data;
-	t_point	mouse;
 
 	data = data_;
-	mlx_mouse_get_pos(data->mlx->mlx, (int *)&mouse.x, (int *)&mouse.y);
+	if (data->fps < MIN_FPS)
+		return (0);
 	if (key == 1)
 	{
-		data->win->xoffset += (data->win->xoffset - mouse.x) * ZOOM;
-		data->win->yoffset += (data->win->yoffset - mouse.y) * ZOOM;
-		data->win->scale *= ZOOM_F;
+		data->win.xoffset += (data->win.xoffset - data->mouse.x) * ZOOM;
+		data->win.yoffset += (data->win.yoffset - data->mouse.y) * ZOOM;
+		data->win.scale *= ZOOM_F;
 	}
 	else if (key == 2)
 	{
-		data->win->xoffset -= (data->win->xoffset - mouse.x) * ZOOM;
-		data->win->yoffset -= (data->win->yoffset - mouse.y) * ZOOM;
-		data->win->scale *= ZOOM_B;
+		data->win.xoffset -= (data->win.xoffset - data->mouse.x) * ZOOM;
+		data->win.yoffset -= (data->win.yoffset - data->mouse.y) * ZOOM;
+		data->win.scale *= ZOOM_B;
 	}
-	mlx_destroy_image(data->mlx->mlx, data->mlx->img);
-	data->mlx->img = new_img(data);
-	place_points(*data->mlx, *data->points, *data->win);
+	mlx_destroy_image(data->mlx.mlx, data->mlx.img);
+	data->mlx.img = new_img(data);
+	place_points(data->mlx, data->points, data->win);
 	return (0);
 }
 
 void	display_grid(t_points points, void *mlx_, void *win)
 {
-	t_win	wininfo;
-	t_mlx	mlx;
 	t_data	data;
 
-	init_win(&wininfo, &points);
-	mlx = (t_mlx){mlx_, win, NULL};
-	data = (t_data){&mlx, &points, &wininfo};
-	mlx.img = new_img(&data);
-	mlx_set_fps_goal(mlx.mlx, FPS_CAP);
-	place_points(mlx, points, wininfo);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
-	mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEWHEEL, &zoom, &data);
-	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, &key_hook, &data);
-	//mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEDOWN, &mouse_hook, &data);
-	//mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEUP, &mouse_unhook, &data);
-	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, &win_hook, mlx.mlx);
-	mlx_loop_hook(mlx.mlx, &putfps, &mlx);
-	mlx_loop(mlx.mlx);
-	free(points.co);
-	mlx_destroy_image(mlx.mlx, mlx.img);
+	data.mlx = (t_mlx){mlx_, win, NULL};
+	init_win(&data.win, &points);
+	data.points = points;
+	data.mouse = (t_point){0, 0};
+	data.mouseold = (t_point){0, 0};
+	data.keydown = 0;
+	data.fps = 0.0f;
+	data.mlx.img = new_img(&data);
+	mlx_set_fps_goal(data.mlx.mlx, FPS_CAP);
+	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_MOUSEWHEEL, &zoom, &data);
+	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_KEYDOWN, &key_hook, &data);
+	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_KEYUP, &key_unhook, &data);
+	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_MOUSEDOWN, &mouse_hook, &data);
+	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_MOUSEUP, &mouse_unhook, &data);
+	mlx_on_event(data.mlx.mlx, data.mlx.win, MLX_WINDOW_EVENT, &win_hook, &data);
+	mlx_loop_hook(data.mlx.mlx, &fdf_loop, &data);
+	place_points(data.mlx, data.points, data.win);
+	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
+	mlx_loop(data.mlx.mlx);
+	free(data.points.co);
+	mlx_destroy_image(data.mlx.mlx, data.mlx.img);
 }

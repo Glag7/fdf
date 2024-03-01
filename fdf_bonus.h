@@ -6,12 +6,17 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:21:17 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/29 19:54:45 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/01 17:24:58 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_BONUS_H
 # define FDF_BONUS_H
+
+//keys
+# define SHIFT 1
+# define LMB 2
+# define RMB 4
 
 //zoom
 # define ZOOM 0.03f
@@ -19,7 +24,7 @@
 # define ZOOM_B 0.97f
 
 //fps
-# define MIN_FPS 15.0f
+# define MIN_FPS 8.0f
 # define FPS_CAP 60
 
 //screen
@@ -100,10 +105,16 @@ typedef struct s_mlx
 
 typedef struct s_data
 {
-	t_mlx		*mlx;
-	t_points	*points;
-	t_win		*win;
-}	t_data;//add : lbm & rmg down + matrix
+	t_mlx		mlx;
+	t_points	points;
+	t_win		win;
+	t_point		mouse;
+	int		pad;//huh
+	t_point		mouseold;
+	unsigned char	keydown;
+	float		fps;
+	//rotmat
+}	t_data;
 
 //utils
 void	put_error(char *s, size_t len, char error);
@@ -124,12 +135,10 @@ void	display_grid(t_points points, void *mlx, void *win);
 //place_points
 void	place_points(t_mlx mlx, t_points points, t_win wininfo);
 
-//fps
-int		putfps(void *mlx);
-float	fps(char set, float new);
+//loop
+int		fdf_loop(void *data_);
 
 //drag
-int		drag(void *data);
 int		mouse_hook(int key, void *data_);
 int		mouse_unhook(int key, void *data_);
 

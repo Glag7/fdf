@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:34:24 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/27 18:38:40 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:37:12 by glag             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,26 @@ void	*new_img(t_data *data)
 {
 	void	*img;
 
-	img = mlx_new_image(data->mlx->mlx, WID, HEI);
+	img = mlx_new_image(data->mlx.mlx, WID, HEI);
 	if (img == NULL)
 	{
-		free(data->points->co);
-		mlx_destroy_window(data->mlx->mlx, data->mlx->win);
-		mlx_destroy_display(data->mlx->mlx);
+		free(data->points.co);
+		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
+		mlx_destroy_display(data->mlx.mlx);
 		put_error("MLX exploded :(\n", 16, 1);
 		exit(ERR_MLX);
 	}
 	return (img);
 }
 
-int	win_hook(int win, void *mlx)
+int	win_hook(int win, void *data_)
 {
+	t_data	*data;
+
+	data = data_;
 	if (win == 0)
-		mlx_loop_end(mlx);
+		mlx_loop_end(data->mlx.mlx);
+	else if (win == 4)
+		data->keydown = 0;
 	return (0);
 }

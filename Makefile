@@ -16,7 +16,7 @@ SRC_BONUS = main_bonus.c \
 	    parsing_errors_bonus.c \
 	    display_bonus.c \
 	    place_points_bonus.c \
-	    fps_bonus.c \
+	    loop_bonus.c \
 	    drag_bonus.c
 
 OBJ = $(SRC:.c=.o)
