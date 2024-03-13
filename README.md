@@ -1,10 +1,10 @@
 # From the subject
 
-__Summary:__ 
+__Summary:__  
 This project is about representing a landscape as a 3D object in which all surfaces are outlined in lines.  
 Version: 3  
 
-Your program has to represent the model in isometric projection.
+Your program has to represent the model in isometric projection.  
 The coordinates of the landscape are stored in a .fdf file passed as a parameter to
 your program. Here is an example:
 ```$>cat 42.fdf
@@ -21,16 +21,16 @@ your program. Here is an example:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 $>
 ```
-Each number represents a point in space:
-• The horizontal position corresponds to its axis.
-• The vertical position corresponds to its ordinate.
+Each number represents a point in space:  
+• The horizontal position corresponds to its axis.  
+• The vertical position corresponds to its ordinate.  
 • The value corresponds to its altitude.  
   
 __Bonuses:__  
-• Include one extra projection (such as parallel or conic)!
-• Zoom in and out.
-• Translate your model.
-• Rotate your model.
+• Include one extra projection (such as parallel or conic)!  
+• Zoom in and out.  
+• Translate your model.  
+• Rotate your model.  
 • Add one more bonus of your choice. (in my case : fps counter, z scale, view saver, reset button, colors, an animation...)  
 
 # usage
