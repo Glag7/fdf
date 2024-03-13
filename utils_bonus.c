@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:34:24 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/01 19:10:54 by glag             ###   ########.fr       */
+/*   Updated: 2024/03/09 19:40:38 by glaguyon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	*new_img(t_data *data)
 	if (img == NULL)
 	{
 		free(data->points.co);
+		free(data->pixels);
 		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
 		mlx_destroy_display(data->mlx.mlx);
 		put_error("MLX exploded :(\n", 16, 1);
@@ -68,9 +69,14 @@ void	*new_img(t_data *data)
 	return (img);
 }
 
-int	win_hook(int win, void *mlx)
+int	win_hook(int win, void *data_)
 {
+	t_data	*data;
+
+	data = data_;
 	if (win == 0)
-		mlx_loop_end(mlx);
+		mlx_loop_end(data->mlx.mlx);
+	else if (win == 4)
+		data->keydown &= (RENDER | ANIM);
 	return (0);
 }

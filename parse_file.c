@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:24:26 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/24 17:43:38 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:57:51 by glaguyon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,6 @@ void	parse_file(int fd, t_points *points)
 	}
 	free(line.s);
 	close(fd);
-	ft_gnl_tstr(-1, 1);
+	ft_gnl_tstr(-1025, 1);
 	copy_lst(line.s, tmp, points, lst);
 }

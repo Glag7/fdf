@@ -1,7 +1,7 @@
 NAME = fdf
 
 COMP = clang
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = main.c \
       utils.c \
@@ -17,18 +17,20 @@ SRC_BONUS = main_bonus.c \
 	    display_bonus.c \
 	    place_points_bonus.c \
 	    loop_bonus.c \
-	    drag_bonus.c
+	    mouse_bonus.c \
+	    colors_bonus.c \
+	    windows_bonus.c \
+	    init_data_bonus.c \
+	    rotate_bonus.c
 
 OBJ = $(SRC:.c=.o)
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 all : libft/libft.a MacroLibX/libmlx.so $(NAME)
-	@echo "do not push everything sucks"
 
 bonus : libft/libft.a MacroLibX/libmlx.so $(OBJ_BONUS)
 	@$(COMP) $(CFLAGS) $^ libft/libft.a MacroLibX/libmlx.so -o $(NAME) -lSDL2 -lm
-	@echo "do not push everything sucks"
 
 MacroLibX/libmlx.so :
 	@make -C MacroLibX -j16
@@ -37,7 +39,7 @@ libft/libft.a :
 	@make -C libft/ file print
 
 $(NAME) : $(OBJ)
-	@$(COMP) $(CFLAGS) $^ libft/libft.a MacroLibX/libmlx.so -o $@ -lSDL2
+	@$(COMP) $(CFLAGS) $^ libft/libft.a MacroLibX/libmlx.so -o $@ -lSDL2 -lm
 
 %.o : %.c
 	@$(COMP) $(CFLAGS) -c $^ -o $@

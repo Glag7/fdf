@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:24:26 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/25 21:40:29 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:00:35 by glaguyon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	copy_lst(char *line, t_list *tmp, t_points *points, t_list *lst)
 {
 	size_t	i;
 
-	ft_gnl_tstr(-1, 1);
+	ft_gnl_tstr(-1025, 1);
 	free(line);
 	if (tmp == NULL)
 		free(points->co);

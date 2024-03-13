@@ -6,11 +6,24 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:21:59 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/02/25 21:31:16 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:02:14 by glaguyon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
+
+static void	print_help(void)
+{
+	ft_putstr_fd("fdf: CONTROLS:\n", 1);
+	ft_putstr_fd("LMB:\t\tdrag\t\t\tR / NP .:\t\treset position\n", 1);
+	ft_putstr_fd("RMB:\t\trotate\t\t\tC / NP enter:\t\tchange colors\n", 1);
+	ft_putstr_fd("lshift + RMB:\trotate slower\
+		F / NP +:\t\tincrease zscale\n", 1);
+	ft_putstr_fd("MMB:\t\tchange projection\tV / NP -:\
+		decrease zscale\n", 1);
+	ft_putstr_fd("MOUSEWHEEL:\tzoom\
+		\tnum / lctrl + num:\tload view / save view\n", 1);
+}
 
 static unsigned int	parse_opt(char *opt)
 {
@@ -120,6 +133,7 @@ int	main(int argc, char **argv)
 		put_error("MLX exploded :(\n", 16, 1);
 		return (ERR_MLX);
 	}
+	print_help();
 	display_grid(points, mlx, win);
 	mlx_destroy_window(mlx, win);
 	mlx_destroy_display(mlx);
