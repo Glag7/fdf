@@ -7,7 +7,8 @@ Version: 3
 Your program has to represent the model in isometric projection.  
 The coordinates of the landscape are stored in a .fdf file passed as a parameter to
 your program. Here is an example:
-```$>cat 42.fdf
+```
+$>cat 42.fdf
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 10 10 0 0 10 10 0 0 0 10 10 10 10 10 0 0 0
