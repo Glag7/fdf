@@ -6,7 +6,7 @@
 /*   By: glaguyon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:21:59 by glaguyon          #+#    #+#             */
-/*   Updated: 2024/03/12 14:02:14 by glaguyon         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:33:46 by glaguyon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ static void	print_help(void)
 	ft_putstr_fd("MMB:\t\tchange projection\tV / NP -:\
 		decrease zscale\n", 1);
 	ft_putstr_fd("MOUSEWHEEL:\tzoom\
-		\tnum / lctrl + num:\tload view / save view\n", 1);
+		\tlctrl + num:\t\tsave view\n", 1);
+	ft_putstr_fd("SPACE:\t\tstart / stop anim\
+	num:\t\t\tload view\n", 1);
 }
 
 static unsigned int	parse_opt(char *opt)
